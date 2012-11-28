@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>#{get 'title' /}</title>
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style type="text/css">
+body {
+	padding-top: 60px;
+	/* 60px to make the container go all the way to the bottom of the topbar */
+}
+</style>
+<link rel="stylesheet" media="screen"
+	href="@{'/public/stylesheets/bootstrap.min.css'}">
+<link rel="stylesheet" media="screen"
+	href="@{'/public/stylesheets/main.css'}">
+#{get 'moreStyles' /}
+<link rel="shortcut icon" type="image/png"
+	href="@{'/public/images/favicon.png'}">
+<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}"
+	type="text/javascript" charset="utf-8"></script>
+<script src="@{'/public/javascripts/bootstrap.min.js'}"
+	type="text/javascript" charset="utf-8"></script>
+#{get 'moreScripts' /}
+</head>
+<body>
+
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="#">&{'application.name'}</a>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li><a href="#">Home</a></li>
+						#{secure.check 'admin'}
+						<li><a href="#">Users</a></li>
+						#{/secure.check}
+						#{if session.get('username') != null}
+							<li><a href="#">My account</a></li>
+						#{/if}
+						<li><a href="#">About</a></li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+				#{if session.get('username') != null}
+				<div class="nav-collapse pull-right">
+					<ul class="nav pull-right">
+						<li><a href="#">Logout ${session.username}</a></li>
+					</ul>
+				</div>
+				#{/if}
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+
+		#{if flash.success}
+		<div class="alert alert-success">
+			<a class="close" href="#">&times;</a>
+			<p>
+				<strong>&{flash.success}</strong>
+			</p>
+		</div>
+		#{/if} #{if flash.error}
+		<div class="alert alert-error">
+			<a class="close" href="#">&times;</a>
+			<p>
+				<strong>&{flash.error}</strong>
+			</p>
+		</div>
+		#{/if} #{doLayout /}
+	</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+tmp
+modules
+lib
+test-result
+logs
+eclipse
+.classpath
+.settings
+bin
+.project
+cobertura.ser
+.DS_Store
+nbproject
+precompiled
+*.sql
